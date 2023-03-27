@@ -1,0 +1,182 @@
+<html>
+
+<head>
+
+	<script>
+
+		// Saldo
+		var saldo = 100.5; //Float
+		var senha = 3589
+
+		// Receber o nome do usuário
+		let nome = prompt("Digite o seu nome: ")
+			alert("Olá " + nome + " é um prazer te ver por aqui!")
+
+		// Func de inicio
+		function inicio() {
+			var escolha = parseInt(prompt('Selecione uma opção 1.) Saldo 2.) Extrato 3.) Saque 4.) Depósito 5.)Transferencia 6.)Sair'));
+
+			switch(escolha){
+				case 1:
+					var usenha = parseInt(prompt("Digite a senha para continuar:"));
+					if (senha == usenha) {
+						ver_saldo();
+					} else {
+						alert("Erro, a senha digitada não está correta.");
+						inicio()
+					}
+					break;
+				case 2:
+					var usenha = parseInt(prompt("Digite a senha para continuar:"));
+					if (senha == usenha) {
+						extrato();
+					} else {
+						alert("Erro, a senha digitada não está correta.");
+						inicio()
+					}
+					inicio()
+					break;
+				case 3:
+					var usenha = parseInt(prompt("Digite a senha para continuar:"));
+					if (senha == usenha) {
+						fazer_saque();
+					} else {
+						alert("Erro, a senha digitada não está correta.");
+						inicio()
+					}
+					inicio()
+					break;
+				case 4:
+					var usenha = parseInt(prompt("Digite a senha para continuar:"));
+					if (senha == usenha) {
+						fazer_deposito();
+					} else {
+						alert("Erro, a senha digitada não está correta.");
+						inicio()
+					}
+					inicio()
+					break;
+				case 5:
+					var usenha = parseInt(prompt("Digite a senha para continuar:"));
+					if (senha == usenha) {
+						transferencia();
+					} else {
+						alert("Erro, a senha digitada não está correta.");
+						inicio()
+					}
+					inicio()
+					break;
+				case 6:
+					sair();
+					break;
+				default:
+					erro();
+					break;
+			}
+		}
+
+		// Func de saldo
+
+		function ver_saldo() {
+			alert('Seu saldo atual é: ' + saldo);
+			inicio();
+		}
+		
+		// Func de deposito
+
+		function fazer_deposito() {
+			var deposito = parseFloat(prompt('Qual o valor para depósito?'));
+			// Not a Number
+			if (isNaN(deposito) || deposito === '') {
+				alert('Por favor, informe um número:');
+				fazer_deposito();
+			} else {
+				saldo += deposito;
+				ver_saldo();
+			}
+		}
+
+		// Func de saque
+
+		function fazer_saque() {
+			var saque = parseFloat(prompt('Qual o valor para saque?'));
+			if (isNaN(saque) || saque === '') {
+				alert('Por favor, informe um número:');
+				fazer_saque();
+			} else if(saque == 0){
+				alert("Operação não autorizada, o valor do saque não pode ser 0.")
+			} else if(saque<saldo){
+				saldo -= saque;
+				ver_saldo();
+			} else {
+				alert("Operação não autorizada, saldo insuficiente.")
+			}
+		}
+
+		// Func de extrato
+
+		function extrato(){
+			const compras = {"Mercado":800,
+							"Conta de Luz":100,
+							"Restaurante":150}
+
+
+			alert(JSON.stringify(compras))
+		}
+
+		// Func de transferencia
+
+		function transferencia(){
+			let idconta = parseInt(prompt("Digite o numero da conta que ira transferir:"))
+
+			if(isNaN(idconta) || idconta == ''){
+				alert("Por favor, digite um número válido.");
+				transferencia();
+			} else if(idconta <= 0){
+				alert("Zero não é um número válido.");
+				transferencia();
+			} else {
+				var valort = parseInt(prompt("Digite o valor da transferência:"));
+
+
+				if(valort <= 0){
+					alert("Operação não autorizada, digite um valor válido.")
+				}else if(valort < saldo){
+					saldo -= valort;
+					ver_saldo();
+				}else{
+					alert("Operação não autorizada, saldo insuficiente.")
+				}
+			}
+			
+		}
+
+		// Func de erro
+
+		function erro() {
+			alert('Por favor, informe um número entre 1 e 6');
+			inicio();
+		}
+
+		// Func sair
+
+		function sair() {
+			var confirma = confirm('Você deseja sair?');
+			if (confirma) {
+				window.close();
+			} else {
+				inicio();
+			}
+		}
+
+		
+		
+		inicio();
+	</script>
+</head>
+
+<body>
+
+</body>
+
+</html>
